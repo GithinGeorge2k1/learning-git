@@ -140,7 +140,7 @@ def save_model(model1,mypath="model.pth"):
 
 def load_model(mypath="model.pth"):
     model = NeuralNetwork()
-    model.load_state_dict(torch.load("model.pth"))
+    model.load_state_dict(torch.load_state_dict_from-url("https://github.com/GithinGeorge2k1/learning-git/blob/mynn_module/model.pth"))
     return model
 
 
