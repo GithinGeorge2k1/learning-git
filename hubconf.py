@@ -23,6 +23,7 @@ classes = [
 
 # Define model
 class NeuralNetwork(nn.Module):
+
     def __init__(self):
         super(NeuralNetwork, self).__init__()
         self.flatten = nn.Flatten()
@@ -39,6 +40,8 @@ class NeuralNetwork(nn.Module):
         logits = self.linear_relu_stack(x)
         return logits
 
+model = NeuralNetwork()
+loss_fn, optimizer = get_lossfn_and_optimizer(model)
 #############################
 
 def get_lossfn_and_optimizer(model):
@@ -128,8 +131,8 @@ def _test(dataloader, model, loss_fn):
 def train(train_dataloader, test_dataloader, epochs=5):
     for t in range(epochs):
         print(f"Epoch {t+1}\n-------------------------------")
-        train(train_dataloader, model, loss_fn, optimizer)
-        test(test_dataloader, model, loss_fn)
+        _train(train_dataloader, model, loss_fn, optimizer)
+        _test(test_dataloader, model, loss_fn)
     print("Done!")
 
 def save_model(mypath="model.pth"):
