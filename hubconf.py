@@ -76,7 +76,7 @@ def create_dataloaders(training_data, test_data, batch_size=64):
     train_dataloader = DataLoader(training_data, batch_size=batch_size)
     test_dataloader = DataLoader(test_data, batch_size=batch_size)
 
-    for X, y in test_dataloader:
+    for X, y in train_dataloader, test_dataloader:
         print(f"Shape of X [N, C, H, W]: {X.shape}")
         print(f"Shape of y: {y.shape} {y.dtype}")
         break
@@ -91,8 +91,6 @@ def get_model():
 
     return model
 
-model = get_model()
-loss_fn, optimizer = get_lossfn_and_optimizer(model)
 #############################
 
 def _train(dataloader, model, loss_fn, optimizer):
