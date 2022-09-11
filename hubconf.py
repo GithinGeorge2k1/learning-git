@@ -1,29 +1,3 @@
-Skip to content
-Search or jump to…
-Pulls
-Issues
-Marketplace
-Explore
- 
-@GithinGeorge2k1 
-ykalidasiittp
-/
-learning-git
-Public
-Code
-Issues
-Pull requests
-Actions
-Projects
-Security
-Insights
-learning-git/hubconf.py /
-@ykalidasiittp
-ykalidasiittp Bug fix NN module
-Latest commit de7e170 in 5 hours
- History
- 1 contributor
-156 lines (121 sloc)  4.07 KB
 
 import torch
 from torch import nn
@@ -180,18 +154,3 @@ def sample_test(model1, test_data):
         
         
         
-    
-Footer
-© 2022 GitHub, Inc.
-Footer navigation
-Terms
-Privacy
-Security
-Status
-Docs
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
