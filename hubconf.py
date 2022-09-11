@@ -40,9 +40,7 @@ class NeuralNetwork(nn.Module):
         logits = self.linear_relu_stack(x)
         return logits
 
-model = NeuralNetwork()
-loss_fn, optimizer = get_lossfn_and_optimizer(model)
-#############################
+
 
 def get_lossfn_and_optimizer(model):
     loss_fn = nn.CrossEntropyLoss()
@@ -93,6 +91,9 @@ def get_model():
 
     return model
 
+model = get_model()
+loss_fn, optimizer = get_lossfn_and_optimizer(model)
+#############################
 
 def _train(dataloader, model, loss_fn, optimizer):
     size = len(dataloader.dataset)
