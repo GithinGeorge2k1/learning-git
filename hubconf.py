@@ -1,3 +1,30 @@
+Skip to content
+Search or jump to…
+Pulls
+Issues
+Marketplace
+Explore
+ 
+@GithinGeorge2k1 
+ykalidasiittp
+/
+learning-git
+Public
+Code
+Issues
+Pull requests
+Actions
+Projects
+Security
+Insights
+learning-git/hubconf.py /
+@ykalidasiittp
+ykalidasiittp Bug fix NN module
+Latest commit de7e170 in 5 hours
+ History
+ 1 contributor
+156 lines (121 sloc)  4.07 KB
+
 import torch
 from torch import nn
 from torch.utils.data import DataLoader
@@ -23,7 +50,6 @@ classes = [
 
 # Define model
 class NeuralNetwork(nn.Module):
-
     def __init__(self):
         super(NeuralNetwork, self).__init__()
         self.flatten = nn.Flatten()
@@ -40,11 +66,11 @@ class NeuralNetwork(nn.Module):
         logits = self.linear_relu_stack(x)
         return logits
 
+#############################
 
-
-def get_lossfn_and_optimizer(model1):
+def get_lossfn_and_optimizer(mymodel):
     loss_fn = nn.CrossEntropyLoss()
-    optimizer = torch.optim.SGD(model1.parameters(), lr=1e-3)
+    optimizer = torch.optim.SGD(mymodel.parameters(), lr=1e-3)
     return loss_fn, optimizer
 
 
@@ -76,7 +102,7 @@ def create_dataloaders(training_data, test_data, batch_size=64):
     train_dataloader = DataLoader(training_data, batch_size=batch_size)
     test_dataloader = DataLoader(test_data, batch_size=batch_size)
 
-    for X, y in train_dataloader, test_dataloader:
+    for X, y in test_dataloader:
         print(f"Shape of X [N, C, H, W]: {X.shape}")
         print(f"Shape of y: {y.shape} {y.dtype}")
         break
@@ -91,7 +117,6 @@ def get_model():
 
     return model
 
-#############################
 
 def _train(dataloader, model, loss_fn, optimizer):
     size = len(dataloader.dataset)
@@ -127,30 +152,46 @@ def _test(dataloader, model, loss_fn):
     correct /= size
     print(f"Test Error: \n Accuracy: {(100*correct):>0.1f}%, Avg loss: {test_loss:>8f} \n")
     
-def train(train_dataloader, test_dataloader, epochs=5):
+def train(train_dataloader, test_dataloader, model1, loss_fn1, optimizer1, epochs=5):
     for t in range(epochs):
         print(f"Epoch {t+1}\n-------------------------------")
-        _train(train_dataloader, model, loss_fn, optimizer)
-        _test(test_dataloader, model, loss_fn)
+        _train(train_dataloader, model1, loss_fn1, optimizer1)
+        _test(test_dataloader, model1, loss_fn1)
     print("Done!")
+    return model1
 
-def save_model(mypath="model.pth"):
-    torch.save(model.state_dict(), "model.pth")
+def save_model(model1,mypath="model.pth"):
+    torch.save(model1.state_dict(), "model.pth")
     print("Saved PyTorch Model State to model.pth")
 
 def load_model(mypath="model.pth"):
     model = NeuralNetwork()
     model.load_state_dict(torch.load("model.pth"))
+    return model
 
 
-def sample_test(model, test_data):
-    model.eval()
+def sample_test(model1, test_data):
+    model1.eval()
     x, y = test_data[0][0], test_data[0][1]
     with torch.no_grad():
-        pred = model(x)
+        pred = model1(x)
         predicted, actual = classes[pred[0].argmax(0)], classes[y]
         print(f'Predicted: "{predicted}", Actual: "{actual}"')
         
         
         
     
+Footer
+© 2022 GitHub, Inc.
+Footer navigation
+Terms
+Privacy
+Security
+Status
+Docs
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About
